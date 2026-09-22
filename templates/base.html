@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='bg3.jpg') }}");
+            background-repeat: no-repeat;
+            background-size:100%;
+            background-attachment: fixed;
+            color: white;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+        nav {
+            background-color: #1e293b;
+            padding: 15px;
+            text-align: center;
+        }
+        div a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        nav a:hover {
+            color: white;
+        }
+        .container {
+            padding: 40px;
+            
+            justify-content: center;
+        }
+
+        .grid-container{
+           max-width: 1000px;
+            grid-template-columns:auto auto auto ;
+            padding: 10px;
+            margin:0  auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap:20px;
+            
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px;
+            display:flex;
+            gap: 15px;
+            min-height:100px;
+            align-items: center;
+            border-radius: 12px;
+            width: 380px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+           
+        }
+
+        .home_head{
+            text-align: center;
+        }
+
+        .h_p{
+           text-align: center;
+           font-size: 20px;
+           font-family:ink free;
+           font-weight: bold; 
+           width:50%; 
+           margin-left: auto;
+           margin-right: auto;
+           color: #dce8f1;
+        }
+        h1, h2 { color: #38bdf8; }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: white;
+        }
+        button {
+            width: 96%;
+            padding: 10px;
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0284c7; color: white; }
+        .result-box {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #0284c7;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .h_card{
+            font-size: 25px; 
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+
+    body{
+        background-color: black;
+        background-attachment:scroll;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr; /* Screen එක පොඩි වෙද්දී Cards එකකට යටින් එක වැටෙනවා */
+        gap: 15px;
+        
+    }
+
+    .home_head {
+        font-size: 1.9rem  !important; 
+    }
+    
+    .h_p{
+        font-size: 0.9rem !important;
+        display: none !important;
+    }
+    
+    .card {
+        width: 100%; 
+        max-width: 100%;
+        background-color: rgba(55, 12, 141, 0.5);
+        
+    }
+    .h_card{
+            font-size:1.1rem !important;
+            color: white;
+        }
+}
+    </style>
+</head>
+<body>
+
+    
+        <a href="{{ url_for('home') }}"><i class="fa fa-home" style="font-size:30px; color:white; padding:20px;"></i></a>
+    
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

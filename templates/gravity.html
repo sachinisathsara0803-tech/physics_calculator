@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Newton's Gravity Calculator</h2>
+    <form action="/gravity" method="POST">
+        <input type="number" step="any" name="mass1" required placeholder="Mass 1 (kg) e.g. 6e24">
+        <input type="number" step="any" name="mass2" required placeholder="Mass 2 (kg) e.g. 7.3e22">
+        <input type="number" step="any" name="distance" required placeholder="Distance (m) e.g. 3.84e8">
+        <button type="submit">Calculate Force</button>
+    </form>
+
+    {% if result is not none %}
+    <div class="result-box">
+        Force: {{ "%.4e"|format(result) }} N
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

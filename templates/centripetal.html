@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+    <h2>Centripetal Force Calculator</h2>
+    <form action="/centripetal" method="POST" >
+        <input type="number" step="any" name="Mass" required placeholder="Mass (kg) e.g. 1000">
+        <input type="number" step="any" name="Velocity" required placeholder="Velocity (m/s) e.g. 8000">
+        <input type="number" step="any" name="Radius" required placeholder="Radius (m) e.g. 7e6">
+        <button type="submit">Calculate Force</button>
+    </form>
+
+    {% if result is not none %}
+    <div class="result-box">
+        Force: {{ "%.4e"|format(result) }} N
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

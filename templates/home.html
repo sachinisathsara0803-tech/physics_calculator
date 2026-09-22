@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <h1 class="home_head" style="font-size: 60px;">Explore the Universe of Physics!&#127757;</h1>
+    <p class="h_p">Easily calculate Gravity, Orbital Velocity, Escape Velocity, and Centripetal Force in seconds. Simple, fast, and accurate tools for students and science lovers.</p>
+
+
+<section>
+<div class="grid-container">
+    <div class="card">
+    <a href="{{ url_for('gravity') }}"  class="h_card">Gravity Calculator</a>
+    <i class="fa-solid fa-meteor" style="color: rgb(136, 8, 241); font-size: 50px;"></i>
+    </div> 
+    
+    <div class="card">
+    <a href="{{ url_for('orbit') }}"   class="h_card">Orbital Velocity Calculator</a>
+<i class="fas fa-satellite" style="color:  rgb(136, 8, 241); font-size: 50px;"></i>    
+</div>
+
+    <div class="card">
+    <a href="{{ url_for('escape') }}"  class="h_card">Escape Velocity Calculator</a>
+    <i class="fas fa-rocket" style="color:  rgb(136, 8, 241); font-size: 50px;"></i>
+</div>
+
+    <div class="card">
+    <a href="{{ url_for('centripetal') }}"   class="h_card">Centripetal Force Calculator</a>
+    <i class="fas fa-globe" style="color:  rgb(136, 8, 241); font-size: 50px;"></i>
+    </div>
+</div>
+
+
+</section>
+{% endblock %}
