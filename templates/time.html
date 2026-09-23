@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card_cal">
+    <h2>Gravitation Time Dilation Calculator</h2>
+    <form action="/time" method="POST">
+        <input type="number" step="any" name="Z_time" required placeholder="Proper Time (sec/min/hours/days/years) e.g. 50">
+        <input type="number" step="any" name="Mass" required placeholder="Mass of the planet/ogject (kg) e.g. 7.3e22">
+        <input type="number" step="any" name="Rdius" required placeholder="Rdius (m) e.g. 3.84e8">
+        <button type="submit">Calculate Time</button>
+    </form>
+
+    {% if result is not none %}
+    <div class="result-box">
+        Time: {{ "%.4e"|format(result) }} N
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

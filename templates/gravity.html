@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% set body_class = "gravity-page" %}
 
 {% block content %}
-<div class="card">
+<div class="card_cal">
     <h2>Newton's Gravity Calculator</h2>
     <form action="/gravity" method="POST">
         <input type="number" step="any" name="mass1" required placeholder="Mass 1 (kg) e.g. 6e24">
@@ -10,9 +11,25 @@
         <button type="submit">Calculate Force</button>
     </form>
 
-    {% if result is not none %}
+    {% if result_force is not none %}
     <div class="result-box">
-        Force: {{ "%.4e"|format(result) }} N
+        Force: {{ "%.4e"|format(result_force) }} N
+    </div>
+    {% endif %}
+</div>
+
+<div class="card_cal">
+    <h2>Radius Calculator (According to Gravity)</h2>
+    <form action="/gravity" method="POST">
+        <input type="number" step="any" name="mass1" required placeholder="Mass 1 (kg) e.g. 6e24">
+        <input type="number" step="any" name="mass2" required placeholder="Mass 2 (kg) e.g. 7.3e22">
+        <input type="number" step="any" name="gravity" required placeholder="Gravity (N)">
+        <button type="submit">Calculate Radius</button>
+    </form>
+
+    {% if result_radius is not none %}
+    <div class="result-box">
+        Radius: {{ "%.4e"|format(result_radius) }} m
     </div>
     {% endif %}
 </div>
