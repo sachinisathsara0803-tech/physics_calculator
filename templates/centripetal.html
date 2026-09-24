@@ -16,5 +16,11 @@
         Force: {{ "%.4e"|format(result) }} N
     </div>
     {% endif %}
+
+    {% if error_1 %}
+    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        ⚠️ {{ error_1 }}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

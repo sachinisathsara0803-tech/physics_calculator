@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% set body_class = "gravity-page" %}
 
+
+
 {% block content %}
+
+
 <div class="card_cal">
     <h2>Newton's Gravity Calculator</h2>
     <form action="/gravity" method="POST">
@@ -14,6 +18,12 @@
     {% if result_force is not none %}
     <div class="result-box">
         Force: {{ "%.4e"|format(result_force) }} N
+    </div>
+    {% endif %}
+
+    {% if error_1 %}
+    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        ⚠️ {{ error_1 }}
     </div>
     {% endif %}
 </div>
@@ -32,5 +42,12 @@
         Radius: {{ "%.4e"|format(result_radius) }} m
     </div>
     {% endif %}
+
+    {% if error_2 %}
+    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        ⚠️ {{ error_2 }}
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}

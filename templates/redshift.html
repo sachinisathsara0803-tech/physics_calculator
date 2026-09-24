@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% set body_class = "redshift-page" %}
+
+{% block content %}
+<div class="card_cal">
+    <h2>Gravitational Redshift Calculator(By using physical data)</h2>
+    <form action="/redshift" method="POST">
+        <input type="number" step="any" name="Mass" required placeholder="Mass of the emitting object (in kg) e.g. 6e24">
+        <input type="number" step="any" name="Radius" required placeholder="Radius of the emitting object (in meters) e.g. 6.96e8">
+        <button type="submit">Calculate Redshift</button>
+    </form>
+
+    {% if result_py_redshift is not none %}
+    <div class="result-box">
+        Force: {{ "%.4e"|format(result_py_redshift) }} 
+    </div>
+    {% endif %}
+
+    {% if error_1 %}
+    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        ⚠️ {{ error_1 }}
+    </div>
+    {% endif %}
+
+    
+</div>
+
+<div class="card_cal">
+    <h2>Gravitational Redshift Calculator(By using wavelength)</h2>
+    <form action="/redshift" method="POST">
+        <input type="number" step="any" name="Observed_w" required placeholder="Obseved wavelength (nm) e.g. 500">
+        <input type="number" step="any" name="Emitted_w" required placeholder="Emitted wavelength (nm) e.g. 450">
+        <button type="submit">Calculate Redshift</button>
+    </form>
+
+    {% if result_wev_redahift is not none %}
+    <div class="result-box">
+        Radius: {{ "%.4e"|format(result_wev_redahift) }} 
+    </div>
+    {% endif %}
+
+    {% if error_2 %}
+    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        ⚠️ {{ error_2 }}
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

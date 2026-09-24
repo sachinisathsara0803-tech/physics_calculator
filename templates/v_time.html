@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card_cal">
+    <h2>Velocity Time Dilation Calculator</h2>
+    <form action="/v_time" method="POST">
+        <input type="number" step="any" name="time" required placeholder="Proper Time (sec/min/hours/days/years) e.g. 50">
+        <input type="number" step="any" name="velocity" required placeholder="Velocity of the moving frame (m/s) e.g. 3e8">
+        
+        <button type="submit">Calculate Time of the Rest frame</button>
+    </form>
+
+    {% if result_time is not none %}
+    <div class="result-box">
+        Force: {{ "%.4e"|format(result_time) }} J
+    </div>
+    {% endif %}
+
+    {% if error_1 %}
+    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+        ⚠️ {{ error_1 }}
+    </div>
+    {% endif %}
+
+    
+</div>
+{% endblock %}

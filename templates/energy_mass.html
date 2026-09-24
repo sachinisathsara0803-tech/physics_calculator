@@ -2,23 +2,24 @@
 
 {% block content %}
 <div class="card_cal">
-    <h2>Orbital Velocity Calculator</h2>
-    <form action="/orbit" method="POST">
-        <input type="number" step="any" name="Radius" required placeholder="Radius(m)">
+    <h2>Mass-Energy Equivalence Calculator</h2>
+    <form action="/energy" method="POST">
+        <input type="number" step="any" name="Mass" required placeholder="Mass (kg)">
         
-        <button type="submit">Calculate Velocity</button>
+        <button type="submit">Calculate Energy</button>
     </form>
 
-    {% if result is not none %}
+    {% if result_energy is not none %}
     <div class="result-box">
-        Force: {{ "%.4e"|format(result) }} N
+        Force: {{ "%.4e"|format(result_energy) }} J
     </div>
     {% endif %}
-    
+
     {% if error_1 %}
     <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
         ⚠️ {{ error_1 }}
     </div>
     {% endif %}
+
 </div>
 {% endblock %}
