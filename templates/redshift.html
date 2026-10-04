@@ -1,49 +1,477 @@
+
 {% extends "base.html" %}
-{% set body_class = "redshift-page" %}
+{% set body_class = "gravity_page" %}
 
 {% block content %}
-<div class="card_cal">
-    <h2>Gravitational Redshift Calculator(By using physical data)</h2>
-    <form action="/redshift" method="POST">
-        <input type="number" step="any" name="Mass" required placeholder="Mass of the emitting object (in kg) e.g. 6e24">
-        <input type="number" step="any" name="Radius" required placeholder="Radius of the emitting object (in meters) e.g. 6.96e8">
-        <button type="submit">Calculate Redshift</button>
-    </form>
 
-    {% if result_py_redshift is not none %}
-    <div class="result-box">
-        Force: {{ "%.4e"|format(result_py_redshift) }} 
+<!-- Hero Section -->
+<section class="hero">
+
+    <div class="hero_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
 
-    {% if error_1 %}
-    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-        ⚠️ {{ error_1 }}
+    <h1 class="main_h1">
+        Gravitational Redshift <span>Calculator</span>
+    </h1>
+
+    <p class="hero_subtitle">
+        Explore the force that keeps our universe together
+    </p>
+
+</section>
+
+
+<!-- Introduction -->
+<section class="intro">
+
+    <div class="intro_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
 
+    <div class="intro_text">
+        <p>
+        </p>
+
+        <p class="intro_more">
+            If you want to explore the formula used to calculate gravity,
+            click the <b>"More Info"</b> button below.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- Calculator Grid -->
+<div class="calculator_grid">
+
+
+    <!-- ================= FORCE CALCULATOR ================= -->
+
+    <section class="card">
+
+        <div class="calculator_heading">
+            <div class="calculator-title-icon">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+
+            <h2>
+                Gravitational Redshift (By using physical data) <span> Calculator</span>
+            </h2>
+        </div>
+
+        <div class="heading_line"></div>
+
+
+        <form action="/redshift" method="POST" class="form">
+
+            <!-- Mass 1 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <label>Mass 1 (kg)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="mass1"
+                        required
+                        placeholder="e.g. 6e24"
+                    >
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+
+            </div>
+
+
+            <!-- Distance -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div class="input_content">
+                    <label>Radius (m)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Radius"
+                        required
+                        placeholder="e.g. 6.96e8"
+                    >
+                </div>
+
+                <div class="unit">
+                    m
+                </div>
+
+            </div>
+
+
+            <!-- Calculate -->
+            <button type="submit" class="calculate_btn">
+
+                <i class="fa-solid fa-calculator"></i>
+
+                <span>Calculate Redshift</span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <!-- Error -->
+        {% if error_1 %}
+
+        <div class="error_box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>{{ error_1 }}</span>
+        </div>
+
+        {% endif %}
+
+
+        <!-- Result -->
+        {% if result_py_redshift is not none %}
+
+        <div class="result_box">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Gravitational Redshift</span>
+
+                <strong>
+                    {{ "%.4e"|format(result_py_redshift) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="result_box empty_result">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Gravitational Redshift</span>
+
+                <strong>—</strong>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- More Info -->
+        <button
+            type="button"
+            class="toggle_btn"
+            onclick="toggleContent('myContent1')"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            More Info
+        </button>
+
+
+        <div id="myContent1" class="content">
+
+            <div class="formula_title">
+                Gravitational Redshift (by using physical data)
+            </div>
+
+            <div class="formula">
+                \[ z = \frac{1}{\sqrt{1 - \frac{2GM}{rc^2}}} - 1 \]
+            </div>
+
+            <div class="formula_cont">
+
+                <p>
+                    <b>Z</b> = z is the redshift parameter.
+                </p>
+
+                <p>
+                    <b>G</b> = Universal gravitational constant,
+                    approximately
+                    \(6.674 \times 10^{-11}\,
+                    N\cdot m^2/kg^2\).
+                </p>
+
+                <p>
+                    <b>M</b> = Mass of the compact object(kg).
+                </p>
+
+                <p>
+                    <b>r</b> = Radial distance from the center of mass to the emission point.
+                </p>
+
+                <p>
+                    <b>c</b> = Speed of light in a vacuum.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= Redshift  CALCULATOR (By using wevelength) ================= -->
+
+    <section class="card">
+
+        <div class="calculator_heading">
+
+            <div class="calculator_title_icon">
+                <i class="fa-solid fa-ruler-combined"></i>
+            </div>
+
+            <h2>
+                Gravitational Redshift (By using wavelength)<span>Calculator</span>
+            </h2>
+
+        </div>
+
+        <div class="heading_line"></div>
+
+
+        <form action="/redshift" method="POST" class="gravity_form">
+
+            <!-- Mass 1 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+
+                    <label>Obseved wavelength (nm)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Observed_w"
+                        required
+                        placeholder="e.g. 500"
+                    >
+
+                </div>
+
+                <div class="unit">
+                    nm
+                </div>
+
+            </div>
+
+
+            <!-- Mass 2 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+
+                    <label>Emitted wavelength (nm)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Emitted_w"
+                        required
+                        placeholder="e.g.450"
+                    >
+
+                </div>
+
+                <div class="unit">
+                    nm
+                </div>
+
+            </div>
+
+
+
+            <!-- Calculate -->
+            <button type="submit" class="calculate_btn">
+
+                <i class="fa-solid fa-ruler-combined"></i>
+
+                <span>Calculate Redshift</span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <!-- Error -->
+        {% if error_2 %}
+
+        <div class="error_box">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <span>{{ error_2 }}</span>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Result -->
+        {% if result_wev_redahift is not none %}
+
+        <div class="result_box">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-ruler-horizontal"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Calculated Redshift</span>
+
+                <strong>
+                    {{ "%.4e"|format(result_wev_redahift) }} nm
+                </strong>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="result_box empty_result">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-ruler-horizontal"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Calculate Redshift</span>
+
+                <strong>—</strong>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- More Info -->
+        <button
+            type="button"
+            class="toggle_btn"
+            onclick="toggleContent('myContent2')"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            More Info
+        </button>
+
+
+        <div id="myContent2" class="content">
+
+            <div class="formula_title">
+                Gravitational Redshift (By using wavelength)
+            </div>
+
+            <div class="formula">
+
+                \[ z = \frac{\lambda_o - \lambda_e}{\lambda_e} \]
+
+            </div>
+
+            <div class="formula_cont">
+
+                <p>
+                    <b>Z</b> = z is the redshift parameter.
+                </p>
+
+
+                <p>
+                    <b>\(\lambda _{\text{obs}}\) </b> =Wavelength measured by the observer far away.
+
+                </p>
+
+                <p>
+                    <b>\(\lambda _{\text{emit}}\) </b> =Original wavelength emitted at the source.
+
+                </p>
     
-</div>
+            </div>
 
-<div class="card_cal">
-    <h2>Gravitational Redshift Calculator(By using wavelength)</h2>
-    <form action="/redshift" method="POST">
-        <input type="number" step="any" name="Observed_w" required placeholder="Obseved wavelength (nm) e.g. 500">
-        <input type="number" step="any" name="Emitted_w" required placeholder="Emitted wavelength (nm) e.g. 450">
-        <button type="submit">Calculate Redshift</button>
-    </form>
+        </div>
 
-    {% if result_wev_redahift is not none %}
-    <div class="result-box">
-        Radius: {{ "%.4e"|format(result_wev_redahift) }} 
-    </div>
-    {% endif %}
-
-    {% if error_2 %}
-    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-        ⚠️ {{ error_2 }}
-    </div>
-    {% endif %}
+    </section>
 
 </div>
+
+
+<!-- Footer -->
+<div class="footer">
+
+    <span></span>
+
+    <i class="fa-solid fa-atom"></i>
+
+    <p>Science</p>
+    <b>•</b>
+    <p>Discover</p>
+    <b>•</b>
+    <p>Calculate</p>
+
+    <span></span>
+
+</div>
+
+
+<script>
+
+function toggleContent(id) {
+
+    const content = document.getElementById(id);
+
+    if (content.classList.contains("show")) {
+
+        content.classList.remove("show");
+
+    } else {
+
+        content.classList.add("show");
+
+    }
+
+}
+
+</script>
+
+
 {% endblock %}

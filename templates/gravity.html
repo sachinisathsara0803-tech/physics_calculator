@@ -1,53 +1,559 @@
+
 {% extends "base.html" %}
-{% set body_class = "gravity-page" %}
-
-
+{% set body_class = "gravity_page" %}
 
 {% block content %}
 
+<!-- Hero Section -->
+<section class="hero">
 
-<div class="card_cal">
-    <h2>Newton's Gravity Calculator</h2>
-    <form action="/gravity" method="POST">
-        <input type="number" step="any" name="mass1" required placeholder="Mass 1 (kg) e.g. 6e24">
-        <input type="number" step="any" name="mass2" required placeholder="Mass 2 (kg) e.g. 7.3e22">
-        <input type="number" step="any" name="distance" required placeholder="Distance (m) e.g. 3.84e8">
-        <button type="submit">Calculate Force</button>
-    </form>
-
-    {% if result_force is not none %}
-    <div class="result-box">
-        Force: {{ "%.4e"|format(result_force) }} N
+    <div class="hero_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
 
-    {% if error_1 %}
-    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-        ⚠️ {{ error_1 }}
+    <h1 class="main_h1">
+        Gravity <span>Calculator</span>
+    </h1>
+
+    <p class="hero_subtitle">
+        Explore the force that keeps our universe together
+    </p>
+
+</section>
+
+
+<!-- Introduction -->
+<section class="intro">
+
+    <div class="intro_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
+
+    <div class="intro_text">
+        <p>
+            Gravity is an invisible force that draws all objects with mass or
+            energy toward each other. This calculator allows you to calculate
+            gravity according to Isaac Newton's law of universal gravitation.
+            According to Newton's view, gravity is a universal force of
+            attraction between any two objects based on their masses and the
+            distance between them.
+        </p>
+
+        <p class="intro_more">
+            If you want to explore the formula used to calculate gravity,
+            click the <b>"More Info"</b> button below.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- Calculator Grid -->
+<div class="calculator_grid">
+
+
+    <!-- ================= FORCE CALCULATOR ================= -->
+
+    <section class="card">
+
+        <div class="calculator_heading">
+            <div class="calculator-title-icon">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+
+            <h2>
+                Newton's <span>Gravity Calculator</span>
+            </h2>
+        </div>
+
+        <div class="heading_line"></div>
+
+
+        <form action="/gravity" method="POST" class="form">
+
+            <!-- Mass 1 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <label>Mass 1 (kg)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="mass1"
+                        required
+                        placeholder="e.g. 6e24"
+                    >
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+
+            </div>
+
+
+            <!-- Mass 2 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <label>Mass 2 (kg)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="mass2"
+                        required
+                        placeholder="e.g. 7.3e22"
+                    >
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+
+            </div>
+
+
+            <!-- Distance -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div class="input_content">
+                    <label>Distance (m)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="distance"
+                        required
+                        placeholder="e.g. 3.84e8"
+                    >
+                </div>
+
+                <div class="unit">
+                    m
+                </div>
+
+            </div>
+
+
+            <!-- Calculate -->
+            <button type="submit" class="calculate_btn">
+
+                <i class="fa-solid fa-calculator"></i>
+
+                <span>Calculate Force</span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <!-- Error -->
+        {% if error_1 %}
+
+        <div class="error_box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>{{ error_1 }}</span>
+        </div>
+
+        {% endif %}
+
+
+        <!-- Result -->
+        {% if result_force is not none %}
+
+        <div class="result_box">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Gravitational Force (N)</span>
+
+                <strong>
+                    {{ "%.4e"|format(result_force) }} N
+                </strong>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="result_box empty_result">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Gravitational Force (N)</span>
+
+                <strong>—</strong>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- More Info -->
+        <button
+            type="button"
+            class="toggle_btn"
+            onclick="toggleContent('myContent1')"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            More Info
+        </button>
+
+
+        <div id="myContent1" class="content">
+
+            <div class="formula_title">
+                Newton's Universal Gravitation
+            </div>
+
+            <div class="formula">
+                \[
+                    F = G \frac{m_1m_2}{r^2}
+                \]
+            </div>
+
+            <div class="formula_cont">
+
+                <p>
+                    <b>F</b> = Gravitational force between two objects,
+                    measured in Newton (N).
+                </p>
+
+                <p>
+                    <b>G</b> = Universal gravitational constant,
+                    approximately
+                    \(6.674 \times 10^{-11}\,
+                    N\cdot m^2/kg^2\).
+                </p>
+
+                <p>
+                    <b>\(m_1\)</b> = Mass of the first object,
+                    measured in kilograms (kg).
+                </p>
+
+                <p>
+                    <b>\(m_2\)</b> = Mass of the second object,
+                    measured in kilograms (kg).
+                </p>
+
+                <p>
+                    <b>r</b> = Distance between the centers of the two
+                    masses, measured in meters (m).
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= RADIUS CALCULATOR ================= -->
+
+    <section class="card">
+
+        <div class="calculator_heading">
+
+            <div class="calculator_title_icon">
+                <i class="fa-solid fa-ruler-combined"></i>
+            </div>
+
+            <h2>
+                Radius <span>Calculator</span>
+            </h2>
+
+        </div>
+
+        <div class="heading_line"></div>
+
+
+        <form action="/gravity" method="POST" class="gravity_form">
+
+            <!-- Mass 1 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+
+                    <label>Mass 1 (kg)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="mass1"
+                        required
+                        placeholder="e.g. 6e24"
+                    >
+
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+
+            </div>
+
+
+            <!-- Mass 2 -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+
+                    <label>Mass 2 (kg)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="mass2"
+                        required
+                        placeholder="e.g. 7.3e22"
+                    >
+
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+
+            </div>
+
+
+            <!-- Gravity -->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+
+                <div class="input_content">
+
+                    <label>Gravity (N)</label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="gravity"
+                        required
+                        placeholder="e.g. 1.98e20"
+                    >
+
+                </div>
+
+                <div class="unit">
+                    N
+                </div>
+
+            </div>
+
+
+            <!-- Calculate -->
+            <button type="submit" class="calculate_btn">
+
+                <i class="fa-solid fa-ruler-combined"></i>
+
+                <span>Calculate Radius</span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <!-- Error -->
+        {% if error_2 %}
+
+        <div class="error_box">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <span>{{ error_2 }}</span>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- Result -->
+        {% if result_radius is not none %}
+
+        <div class="result_box">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-ruler-horizontal"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Calculated Radius</span>
+
+                <strong>
+                    {{ "%.4e"|format(result_radius) }} m
+                </strong>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="result_box empty_result">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-ruler-horizontal"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Calculated Radius</span>
+
+                <strong>—</strong>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- More Info -->
+        <button
+            type="button"
+            class="toggle_btn"
+            onclick="toggleContent('myContent2')"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            More Info
+        </button>
+
+
+        <div id="myContent2" class="content">
+
+            <div class="formula_title">
+                Radius From Gravitational Force
+            </div>
+
+            <div class="formula">
+
+                \[
+                    r =
+                    \sqrt{
+                        \frac{G \cdot m_1m_2}{F}
+                    }
+                \]
+
+            </div>
+
+            <div class="formula_cont">
+
+                <p>
+                    <b>F</b> = Gravitational force between two objects,
+                    measured in Newton (N).
+                </p>
+
+                <p>
+                    <b>G</b> = Universal gravitational constant,
+                    approximately
+                    \(6.674 \times 10^{-11}\,
+                    N\cdot m^2/kg^2\).
+                </p>
+
+                <p>
+                    <b>\(m_1\)</b> = Mass of the first object,
+                    measured in kilograms (kg).
+                </p>
+
+                <p>
+                    <b>\(m_2\)</b> = Mass of the second object,
+                    measured in kilograms (kg).
+                </p>
+
+                <p>
+                    <b>r</b> = Distance between the centers of the two
+                    masses, measured in meters (m).
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
 </div>
 
-<div class="card_cal">
-    <h2>Radius Calculator (According to Gravity)</h2>
-    <form action="/gravity" method="POST">
-        <input type="number" step="any" name="mass1" required placeholder="Mass 1 (kg) e.g. 6e24">
-        <input type="number" step="any" name="mass2" required placeholder="Mass 2 (kg) e.g. 7.3e22">
-        <input type="number" step="any" name="gravity" required placeholder="Gravity (N)">
-        <button type="submit">Calculate Radius</button>
-    </form>
 
-    {% if result_radius is not none %}
-    <div class="result-box">
-        Radius: {{ "%.4e"|format(result_radius) }} m
-    </div>
-    {% endif %}
+<!-- Footer -->
+<div class="footer">
 
-    {% if error_2 %}
-    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-        ⚠️ {{ error_2 }}
-    </div>
-    {% endif %}
+    <span></span>
+
+    <i class="fa-solid fa-atom"></i>
+
+    <p>Science</p>
+    <b>•</b>
+    <p>Discover</p>
+    <b>•</b>
+    <p>Calculate</p>
+
+    <span></span>
 
 </div>
+
+
+<script>
+
+function toggleContent(id) {
+
+    const content = document.getElementById(id);
+
+    if (content.classList.contains("show")) {
+
+        content.classList.remove("show");
+
+    } else {
+
+        content.classList.add("show");
+
+    }
+
+}
+
+</script>
+
+
 {% endblock %}

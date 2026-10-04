@@ -1,27 +1,299 @@
 {% extends "base.html" %}
+{% set body_class="gravity_page"%}
 
 {% block content %}
-<div class="card_cal">
-    <h2>Gravitation Time Dilation Calculator</h2>
-    <form action="/time" method="POST">
-        <input type="number" step="any" name="Z_time" required placeholder="Proper Time (sec/min/hours/days/years) e.g. 50">
-        <input type="number" step="any" name="Mass" required placeholder="Mass of the planet/ogject (kg) e.g. 7.3e22">
-        <input type="number" step="any" name="Rdius" required placeholder="Rdius (m) e.g. 3.84e8">
-        <button type="submit">Calculate Time</button>
-    </form>
 
-    {% if result is not none %}
-    <div class="result-box">
-        Time: {{ "%.4e"|format(result) }} N
+<section class="hero">
+    <div class="hero_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
 
-    {% if error_1 %}
-    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-        ⚠️ {{ error_1 }}
+    <h1 class="main_h1">
+        Gravitation Time Dilation <span>Calculator</span>
+    </h1>
+
+    <p class="hero_subtitle">
+
+    </p>
+
+</section>
+
+
+<!-- Introduction -->
+<section class="intro">
+
+    <div class="intro_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
 
-    
+    <div class="intro_text">
+        <p>
+
+        </p>
+
+        <p class="intro_more">
+            If you want to explore the formula used to calculate gravity,
+            click the <b>"More Info"</b> button below.
+        </p>
+    </div>
+</section>
+
+
+<!-- Calculator Grid -->
+<div class="calculator_grid">
+
+    <!-- ================= Velocity CALCULATOR ================= -->
+
+
+    <section class="card">
+        <div class="calculator_heading">
+            <div>
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+
+            <h2>
+                Gravitation Time Dilation <span>Calculator</span>
+            </h2>
+            
+        </div>
+
+
+        <div class="heading-line"></div>
+
+
+        <form action="/time" method="POST" class="form">
+
+            <!--Radius-->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <labal>Proper Time</labal>
+
+                    <input 
+                        type="number" 
+                        step="any" 
+                        name="Z_time" 
+                        required 
+                        placeholder="e.g. 50"
+                        
+                    >
+                </div>
+
+                <div class="unit">
+                    s/m/h/d/y
+                </div>
+            </div>
+
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <labal>Mass (kg)</labal>
+
+                    <input 
+                        type="number" 
+                        step="any" 
+                        name="Mass" 
+                        required 
+                        placeholder="e.g. 7.3e22"
+                        
+                    >
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+            </div>
+
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <labal>Radius (m)</labal>
+
+                    <input 
+                        type="number" 
+                        step="any" 
+                        name="Radius" 
+                        required 
+                        placeholder="e.g. 7.3e22"
+                        
+                    >
+                </div>
+
+                <div class="unit">
+                    m
+                </div>
+            </div>
+
+            <!--Calculate-->
+        
+            <button type="submit" class="calculate_btn">
+                
+                <i class="fa-solid fa-calculator"></i>
+                
+                <span>Calculate Time</span>
+                
+                <i class="fa-solid fa-arrow-right"></i>
+
+            
+            </button>
+
+
+        </form>
+
+        <!--Error-->
+        {% if error_1 %}
+        
+        <div class="error_box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>{{ error_1 }}</span>
+        </div>
+
+        {% endif %}
+
+        <!--Result-->
+        {% if result is not none %}
+        <div class="result_box">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Gravitational Time Dilation</span>
+
+                <strong>
+                    {{ "%.4e"|format(result) }} sec/min/hour/years
+                </strong>
+
+            </div>
+
+            {% else %}
+            <div class="result_box empty_result">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Gravitational Time Dilation</span>
+
+                <strong>—</strong>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!--More info-->
+        <button 
+            type="button"
+            class="toggle_btn"
+            onclick="toggleContent('myContent1')"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            More Info
+        </button>
+
+        <div id="myContent1" class="content">
+            <div class="formula_title">
+                Gravitational Time Dilation
+            </div>
+
+            <div class="formula">
+            \[ t' = \frac{t}{\sqrt{1 - \frac{2GM}{rc^2}}} \]
+
+            </div>
+
+            <div class="formula_cont">
+                <p>
+                    <b>\(t_{0}\) </b> = Proper time measured by an observer deep in the gravitational field (closer to the mass).
+                </p>
+
+                <p>
+                    <b>\(t_{f}\) </b> =Coordinate time measured by an observer at an infinite distance away from the mass (where gravity is zero).
+                </p>
+
+                <p>
+                    <b>G</b> =  Universal gravitational constant \(6.674 \times 10^{-11}\,
+                        N\cdot m^2/kg^2\).
+                </p>
+
+                <p>
+                    <b>M</b> = Mass of the object creating the gravitational field (kg).
+                </p>
+
+                <p>
+                    <b>r</b> = Radial distance from the center of the mass to the observer.
+                </p>
+
+                <p>
+                    <b>c</b>  = Speed of light in a vacuum (\(\approx 3 \times 10^8 \text{ m/s}\)).
+                </p>
+            </div>
+        </div>
+
+        
+
+        </div>
+
+
+    </section>
+
+
 </div>
+
+<!--Footer-->
+<div class="footer">
+
+    <span></span>
+
+    <i class="fa-solid fa-atom"></i>
+
+    <p>Science</p>
+    <b>•</b>
+    <p>Discover</p>
+    <b>•</b>
+    <p>Calculate</p>
+
+    <span></span>
+
+</div>
+
+<script>
+
+function toggleContent(id) {
+
+    const content = document.getElementById(id);
+
+    if (content.classList.contains("show")) {
+
+        content.classList.remove("show");
+
+    } else {
+
+        content.classList.add("show");
+
+    }
+
+}
+
+</script>
+
+
 {% endblock %}

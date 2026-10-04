@@ -131,7 +131,7 @@ def time():
     if request.method== 'POST':
         t=float(request.form['Z_time'])
         m=float(request.form['Mass'])
-        r=float(request.form['Rdius'])
+        r=float(request.form['Radius'])
         if r<=0 or m<=0 or t<=0:
             error_1="Radius, Mass and Time must be positive numbers!" 
         else:

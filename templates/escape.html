@@ -1,23 +1,266 @@
 {% extends "base.html" %}
+{% set body_class="gravity_page"%}
 
 {% block content %}
-<div class="card_cal">
-    <h2>Escape Calculator</h2>
-    <form action="/escape" method="POST">
-        <input type="number" step="any" name="Mass" required placeholder="Mass (kg) e.g. 6e24">
-        <input type="number" step="any" name="Radius" required placeholder="Radius(m)">
-        <button type="submit">Calculate Force</button>
-    </form>
 
-    {% if result is not none %}
-    <div class="result-box">
-        Force: {{ "%.4e"|format(result) }} N
+<section class="hero">
+    <div class="hero_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
-    {% if error_1 %}
-    <div style="color: #ff4d4d; background: rgba(255, 0, 0, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-        ⚠️ {{ error_1 }}
+
+    <h1 class="main_h1">
+        Escape Velocity <span>Calculator</span>
+    </h1>
+
+    <p class="hero_subtitle">
+
+    </p>
+
+</section>
+
+
+<!-- Introduction -->
+<section class="intro">
+
+    <div class="intro_icon">
+        <i class="fa-solid fa-atom"></i>
     </div>
-    {% endif %}
+
+    <div class="intro_text">
+        <p>
+
+        </p>
+
+        <p class="intro_more">
+            If you want to explore the formula used to calculate gravity,
+            click the <b>"More Info"</b> button below.
+        </p>
+    </div>
+</section>
+
+
+<!-- Calculator Grid -->
+<div class="calculator_grid">
+
+    <!-- ================= Velocity CALCULATOR ================= -->
+
+
+    <section class="card">
+        <div class="calculator_heading">
+            <div>
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+
+            <h2>
+                Escape Velocity <span>Calculator</span>
+            </h2>
+            
+        </div>
+
+
+        <div class="heading-line"></div>
+
+
+        <form action="/escape" method="POST" class="form">
+
+            <!--Radius-->
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <labal>Mass (kg)</labal>
+
+                    <input 
+                        type="number" 
+                        step="any" 
+                        name="Mass" 
+                        required 
+                        placeholder=" e.g. 6e24"
+                        
+                    >
+                </div>
+
+                <div class="unit">
+                    kg
+                </div>
+            </div>
+
+            <div class="input_wrapper">
+
+                <div class="input_icon">
+                    <i class="fa-solid fa-weight-hanging"></i>
+                </div>
+
+                <div class="input_content">
+                    <labal>Radius (m)</labal>
+
+                    <input 
+                        type="number" 
+                        step="any" 
+                        name="Radius" 
+                        required 
+                        placeholder="e.g.1.7e30"
+                        
+                    >
+                </div>
+
+                <div class="unit">
+                    m
+                </div>
+            </div>
+
+            <!--Calculate-->
+        
+            <button type="submit" class="calculate_btn">
+                
+                <i class="fa-solid fa-calculator"></i>
+                
+                <span>Calculate Velocity</span>
+                
+                <i class="fa-solid fa-arrow-right"></i>
+
+            
+            </button>
+
+
+        </form>
+
+        <!--Error-->
+        {% if error_1 %}
+        
+        <div class="error_box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>{{ error_1 }}</span>
+        </div>
+
+        {% endif %}
+
+        <!--Result-->
+        {% if result is not none %}
+        <div class="result_box">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Escape Velocity Force (m/s)</span>
+
+                <strong>
+                    {{ "%.4e"|format(result) }} m/s
+                </strong>
+
+            </div>
+
+            {% else %}
+            <div class="result_box empty_result">
+
+            <div class="result_icon">
+                <i class="fa-solid fa-atom"></i>
+            </div>
+
+            <div class="result_content">
+
+                <span>Escape Velocity (m/s)</span>
+
+                <strong>—</strong>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!--More info-->
+        <button 
+            type="button"
+            class="toggle_btn"
+            onclick="toggleContent('myContent1')"
+        >
+            <i class="fa-solid fa-circle-info"></i>
+            More Info
+        </button>
+
+        <div id="myContent1" class="content">
+            <div class="formula_title">
+                Escape Velocity
+            </div>
+
+            <div class="formula">
+            \[ v_e = \sqrt{\frac{2GM}{R}} \]
+            </div>
+
+            <div class="formula_cont">
+                <p>
+                    <b>V<sub>e</sub></b> =  Escape velocity (or speed).
+                </p>
+
+                <p>
+                    <b>G</b> =  Universal gravitational constant \(6.674 \times 10^{-11}\,
+                        N\cdot m^2/kg^2\).
+                </p>
+
+                <p>
+                    <b>M</b> = Mass of the central body being orbited (like Earth or a star) in kilograms (kg).
+                </p>
+
+                <p>
+                    <b>R</b> = Distance from the center of the central body to the orbiting object in meters (m). 
+                </p>
+            </div>
+        </div>
+
+        
+
+        </div>
+
+
+    </section>
+
+
 </div>
+
+<!--Footer-->
+<div class="footer">
+
+    <span></span>
+
+    <i class="fa-solid fa-atom"></i>
+
+    <p>Science</p>
+    <b>•</b>
+    <p>Discover</p>
+    <b>•</b>
+    <p>Calculate</p>
+
+    <span></span>
+
+</div>
+
+<script>
+
+function toggleContent(id) {
+
+    const content = document.getElementById(id);
+
+    if (content.classList.contains("show")) {
+
+        content.classList.remove("show");
+
+    } else {
+
+        content.classList.add("show");
+
+    }
+
+}
+
+</script>
+
+
 {% endblock %}
